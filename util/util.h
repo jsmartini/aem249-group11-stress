@@ -29,7 +29,7 @@ namespace linalg{
                 elements = x;
             }
             
-            Matrix inv();
+            vector<vector<T>> inv();
 
             vector<vector<T>> get(){
                 return elements;
@@ -44,7 +44,17 @@ bool vec_ops::agree(vector<double> x, vector<double> y){
 }
 
 vector<double> vec_ops::cross(vector<double> x, vector<double> y){
-    
+    if(!agree(x,y)){
+        throw -1;
+    } else if(x.size() != 2){
+        throw -2;
+    }else{
+        vector<double> cross (2);
+        cross.at(0) = (x.at(1)*y.at(2)) - (x.at(2)*y.at(1));
+        cross.at(1) = -1*((x.at(2)*y.at(0)) - (x.at(0)*y.at(2)));
+        cross.at(2) = (x.at(0)*y.at(1)) - (x.at(1)*y.at(0));
+        return cross; 
+    }
 }
 
 double vec_ops::dot(vector<double> x, vector<double> y){
@@ -91,5 +101,15 @@ vector<double> vec_ops::div(vector<double> x, double scalar){
     }
     return x;
 }
+
+vector<vector<double>> linalg::Matrix::inv(){
+    
+}
+
+
+
+
+
+
 
 #endif // !UITL
