@@ -14,6 +14,8 @@ namespace vec_ops{
     vector<double> div(vector<double>, double scalar);
     vector<double> resize(vector<double>, int);
     bool agree(vector<double>, vector<double>);
+    void print(vector<double>, string);
+
 }
 
 namespace linalg{
@@ -44,15 +46,15 @@ bool vec_ops::agree(vector<double> x, vector<double> y){
 }
 
 vector<double> vec_ops::cross(vector<double> x, vector<double> y){
+    //buggy
+    //doesnt work
     if(!agree(x,y)){
         throw -1;
-    } else if(x.size() != 2){
-        throw -2;
     }else{
         vector<double> cross (2);
-        cross.at(0) = (x.at(1)*y.at(2)) - (x.at(2)*y.at(1));
-        cross.at(1) = -1*((x.at(2)*y.at(0)) - (x.at(0)*y.at(2)));
-        cross.at(2) = (x.at(0)*y.at(1)) - (x.at(1)*y.at(0));
+        cross[0] = (x.at(1)*y.at(2)) - (x.at(2)*y.at(1));
+        cross[1] = -1*((x.at(2)*y.at(0)) - (x.at(0)*y.at(2)));
+        cross[2] = (x.at(0)*y.at(1)) - (x.at(1)*y.at(0));
         return cross; 
     }
 }
@@ -102,8 +104,16 @@ vector<double> vec_ops::div(vector<double> x, double scalar){
     return x;
 }
 
-vector<vector<double>> linalg::Matrix::inv(){
-    
+void vec_ops::print(vector<double> vec, string trailing = "\n"){
+    std::cout<<"<";
+    for(unsigned i = 0; i < vec.size(); ++i){
+        if(i == vec.size()-1){
+            std::cout<<vec[i];
+            break;
+        }   
+        std::cout<<vec[i]<<",";
+    }
+    std::cout<< ">" << trailing.c_str();
 }
 
 
