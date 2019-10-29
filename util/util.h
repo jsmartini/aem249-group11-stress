@@ -15,7 +15,6 @@ namespace vec_ops{
     vector<double> resize(vector<double>, int);
     bool agree(vector<double>, vector<double>);
     void print(vector<double>, string);
-
 }
 
 namespace linalg{
