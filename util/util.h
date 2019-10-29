@@ -51,10 +51,10 @@ vector<double> vec_ops::cross(vector<double> x, vector<double> y){
     if(!agree(x,y)){
         throw -1;
     }else{
-        vector<double> cross (2);
-        cross[0] = (x.at(1)*y.at(2)) - (x.at(2)*y.at(1));
-        cross[1] = -1*((x.at(2)*y.at(0)) - (x.at(0)*y.at(2)));
-        cross[2] = (x.at(0)*y.at(1)) - (x.at(1)*y.at(0));
+        vector<double> cross (3);
+        cross[0] = (x.at(1)*y.at(2))-(x.at(2)*y.at(1));
+        cross[1] = (x.at(2)*y.at(0))-(x.at(0)*y.at(2));
+        cross[2] = (x.at(0)*y.at(1))-(x.at(1)*y.at(0));
         return cross; 
     }
 }
@@ -105,15 +105,11 @@ vector<double> vec_ops::div(vector<double> x, double scalar){
 }
 
 void vec_ops::print(vector<double> vec, string trailing = "\n"){
-    std::cout<<"<";
-    for(unsigned i = 0; i < vec.size(); ++i){
-        if(i == vec.size()-1){
-            std::cout<<vec[i];
-            break;
-        }   
-        std::cout<<vec[i]<<",";
+    cout<< "<";
+    for(vector<double>::iterator i = vec.begin(); i != vec.end(); i++){
+       cout << *i << ",";
     }
-    std::cout<< ">" << trailing.c_str();
+    cout<<">" << trailing.c_str();
 }
 
 
