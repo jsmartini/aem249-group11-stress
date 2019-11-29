@@ -147,54 +147,54 @@ int main(){
 	FRX=(F1x+F2x)*(0-1);
 	FRY=(F1y+F2y+(RDL1*(XRL12-XRL11))+(RDL2*(XRL22-XRL21)))*(0-1);
 	FRM=((F1y*XF1)+(F2y*XF2)+((RDL1*(XRL12-XRL11))*(XRL11+((XRL12-XRL11)/2)))+((RDL2*(XRL22-XRL21))*(XRL11+((XRL12-XRL11)/2))))*(0-1);
-	double ABNS, ABNSM, ABSS, ABSSM, BBNS, BBNSM, BBSS, BBSSM, maxstress, maxstrain;
-	double localVF, localMF, localTF, localAF;
-	for(double localx; localx<=length;localx+=.1){
+	double ABNS=0, ABNSM=0, ABSS=0, ABSSM=0, BBNS=0, BBNSM=0, BBSS=0, BBSSM=0, maxstress=0, maxstrain=0;
+	double localVF=0, localMF=0, localTF=0, localAF=0, maxstressxlocation=0, maxstrainxlocation=0, maxstresslocation=0, maxstrainlocation=0;
+	for(double localx=0; localx<=length;localx+=.01){
 		localVF=FRY;
 		localMF=FRM+(FRY*(0-localx));
 		localTF=FRT;
 		localAF=FRX;
 		if(XF1<=localx){
-			localVF=+F1y;
-			localMF=+(F1y*(XF1-localx));
-			localAF=+F1x;
+			localVF+=F1y;
+			localMF+=(F1y*(XF1-localx));
+			localAF+=F1x;
 		}
 		if(XF2<=localx){
-			localVF=+F2y;
-			localMF=+(F2y*(XF2-localx));
-			localAF=+F2x;
+			localVF+=F2y;
+			localMF+=(F2y*(XF2-localx));
+			localAF+=F2x;
 		}
 		if(XTF1<=localx){
-			localTF=+TF1;
+			localTF+=TF1;
 		}
 		if(XTF2<=localx){
-			localTF=+TF2;
+			localTF+=TF2;
 		}
 		if(XRL11<=localx){
 			if(XRL12<=localx){
-				localMF=+(RDL1*(XRL12-XRL11)*((XRL11+((XRL12-XRL11)/2))-localx));
-				localVF=+(RDL1*(XRL12-XRL11));
+				localMF+=(RDL1*(XRL12-XRL11)*((XRL11+((XRL12-XRL11)/2))-localx));
+				localVF+=(RDL1*(XRL12-XRL11));
 			}
 			else{
-				localMF=+(RDL1*(localx-XRL11)*((XRL11+((localx-XRL11)/2))-localx));
-				localVF=+(RDL1*(localx-XRL11));
+				localMF+=(RDL1*(localx-XRL11)*((XRL11+((localx-XRL11)/2))-localx));
+				localVF+=(RDL1*(localx-XRL11));
 			}
 		}
 		if(XRL21<=localx){
 			if(XRL22<=localx){
-				localMF=+(RDL2*(XRL22-XRL21)*((XRL21+((XRL22-XRL21)/2))-localx));
-				localVF=+(RDL2*(XRL22-XRL21));
+				localMF+=(RDL2*(XRL22-XRL21)*((XRL21+((XRL22-XRL21)/2))-localx));
+				localVF+=(RDL2*(XRL22-XRL21));
 			}
 			else{
-				localMF=+(RDL2*(localx-XRL21)*((XRL21+((localx-XRL21)/2))-localx));
-				localVF=+(RDL2*(localx-XRL21));
+				localMF+=(RDL2*(localx-XRL21)*((XRL21+((localx-XRL21)/2))-localx));
+				localVF+=(RDL2*(localx-XRL21));
 			}
 		}
 		if(XM1<=localx){
-			localMF=+M1;
+			localMF+=M1;
 		}
 		if(XM2<=localx){
-			localMF=+M2;
+			localMF+=M2;
 		}
 		if(localAF<0){
 			localAF=localAF*-1;
@@ -218,17 +218,41 @@ int main(){
 		BBSSM=sqrt(pow(BBNS/2,2)+pow(BBSS,2));
 		if(ABNSM>maxstress){
 			maxstress=ABNSM;
+			maxstressxlocation=localx;
+			maxstresslocation=1;
 		}
 		if(ABSSM>maxstrain){
 			maxstrain=ABSSM;
+			maxstrainxlocation=localx;
+			maxstrainlocation=1;
 		}
 		if(BBNSM>maxstress){
 			maxstress=ABNSM;
+			maxstressxlocation=localx;
+			maxstresslocation=2;
 		}
 		if(BBSSM>maxstrain){
 			maxstrain=ABSSM;
+			maxstrainxlocation=localx;
+			maxstrainlocation=2;
 		}
 	}
-	cout<<"The max stress in the cylinder is "<<maxstress<<"Pa"<<endl;
-	cout<<"The max strain in the cylinder is "<<maxstrain<<"Pa"<<endl;
+	cout<<"The reaction force at the wall in the 'y' direction is "<<FRY<<"N"<<endl;
+	cout<<"The reaction force at the wall in the 'x' direction is "<<FRX<<"N"<<endl;
+	cout<<"The reaction torsion force about the 'x' axis at the wall is "<<FRT<<"Nm"<<endl;
+	cout<<"The reaction moment force about the 'z' axis at the wall is "<<FRM<<"Nm"<<endl;
+	cout<<"The max stress in the cylinder is "<<maxstress<<"Pa at "<<maxstressxlocation<<"meters from the wall"<<endl;
+	cout<<"The max strain in the cylinder is "<<maxstrain<<"Pa at "<<maxstrainxlocation<<"meters from the wall"<<endl;
+	if(maxstresslocation==1){
+		cout<<"the max stress is located on the top or bottom of the cylinder"<<endl;	
+	}
+	if(maxstresslocation==2){
+		cout<<"the max strain is located on the left or right side of the cylinder"<<endl;	
+	}
+	if(maxstrainlocation==1){
+		cout<<"the max strain is located on the top or bottom of the cylinder"<<endl;	
+	}
+	if(maxstrainlocation==2){
+		cout<<"the max strain is located on the left or right side of the cylinder"<<endl;	
+	}
 }
