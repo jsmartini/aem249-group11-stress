@@ -8,155 +8,195 @@ int main(){
 	double length, diameter, CSarea, torsionconstant, momentconstant, transverseconstant;
 	//third line of variables are used for orgainizing inputed values 
 	char answer;
-	cout<<"what is the diameter of the cylinder in meters"<<endl;
+	cout<<"What is the diameter of the cylinder in meters?"<<endl; //get values for the dimentions of the cylinder
 	cin>>diameter;
 	while(diameter<=0){
-		cout<<"the diameter of the cylinder must be a positive non-zero value,\nenter another value for the diameter of the cylinder"<<endl;
+		cout<<"The diameter of the cylinder must be a positive non-zero value\nEnter another value for the diameter of the cylinder in meters"<<endl;
 		cin>>diameter;
 	}
-	cout<<"what is the length of the cylinder in meters"<<endl;
+	cout<<"What is the length of the cylinder in meters?"<<endl;
 	cin>>length;
 	while (length<=0){
-		cout<<"the lenght of the cylinder must be a positive non-zero value,\nenter another value for the length of the cylinder in meters"<<endl;
+		cout<<"The length of the cylinder must be a positive non-zero value\nEnter another value for the length of the cylinder in meters"<<endl;
 		cin>>length;
 	}
-	CSarea = diameter*diameter*M_PI*0.25;
+	CSarea = diameter*diameter*M_PI*0.25;  //solve for constants based on the diminsions of the cylinder
 	momentconstant = 32/(M_PI*pow(diameter,3));
 	torsionconstant = 16/(M_PI*pow(diameter,3));
 	transverseconstant = 4/(3*M_PI*pow(diameter/2,2));
-	cout<<"Is there a concentrated force acting on the cylinder(y,n)"<<endl;
+	cout<<"Is there a concentrated force acting on the cylinder(y,n)?"<<endl;
 	cin>>answer;
 	while(answer!= 'y' && answer != 'n'){
-		cout<<"did not understand input, enter 'y' for yes and 'n' for no"<<endl;
+		cout<<"Did not understand input, enter 'y' for yes and 'n' for no"<<endl;
 		cin>>answer;
 	}
 	if (answer== 'y'){         // collecting inputs of concentrated forces on the cylinder
-		cout<<"what is the 'x' value of the concentrated load in Newtons.  positive values are pointed away from the wall support @ x=0"<<endl;
+		cout<<"What is the 'x' value of the concentrated load in Newtons.  \npositive values are pointed away from the wall support @ x=0"<<endl;
 		cin>>F1x;
-		cout<<"what is the 'y' value of the concentrated load in Newtons.  positive values are pointed up in the oppisite direction of gravity"<<endl;
+		cout<<"What is the 'y' value of the concentrated load in Newtons.  \npositive values are pointed up in the oppisite direction of gravity"<<endl;
 		cin>>F1y;
-		cout<<"at what x value in meters along the cylinder is the concentrated load located?"<<endl;
+		cout<<"At what x value in meters along the cylinder is the concentrated load located?"<<endl;
 		cin>>XF1;
 		while (XF1<=0 or XF1>length){
-			cout<<"the x value for the location of the concentrated load on the cylinder must be a positive non-zero value that is less than or equal to the lenth of the cylinder,\nenter another value"<<endl;
+			cout<<"The x value for the location of the concentrated load on the cylinder\nmust be a positive non-zero value that is less than or equal\nto the lenth of the cylinder,\nenter another value"<<endl;
 			cin>>XF1;
 		}
-		cout<<"is there another concentrated load acting on the cylinder(y,n)"<<endl;
+		cout<<"Is there another concentrated load acting on the cylinder?(y,n)"<<endl;
 		cin>>answer;
 		while(answer!= 'y' && answer != 'n'){
-			cout<<"did not understand input, enter 'y' for yes and 'n' for no"<<endl;
+			cout<<"Could not understand input\nEnter 'y' for yes and 'n' for no"<<endl;
 			cin>>answer;
 		}
 		if (answer== 'y'){
-			cout<<"what is the value of the 'x' value of the concentrated load in Newtons.  positive values are pointed away from the wall support or first pin located @ x=0"<<endl;
+			cout<<"What is the value of the 'x' value of the concentrated load in Newtons.  \nNegative values are pointed toward the wall support located @ x=0"<<endl;
 			cin>>F2x;
-			cout<<"what is the value of the 'y' value of the concentrated load in Newtons.  positive values are pointed up in the oppisite direction of gravity"<<endl;
+			cout<<"what is the value of the 'y' value of the concentrated load in Newtons.  \nNegative values are pointed in the oppisite direction of gravity"<<endl;
 			cin>>F2y;
-			cout<<"at what x value in meters along the cylinder is the concentrated load located?"<<endl;
+			cout<<"At what x value in meters along the cylinder is the concentrated load located?"<<endl;
 			cin>>XF2;
 			while (XF2<=0 or XF2>length){
-				cout<<"the x value for the location of the concentrated load on the cylinder must be a positive non-zero value that is less than or equal to the lenth of the cylinder,\nenter another value"<<endl;
+				cout<<"The x value for the location of the concentrated load on the cylinder\nmust be a positive non-zero value that is less than or equal to the length of the cylinder,\nenter another value"<<endl;
 				cin>>XF2;
 			}
 		}
 	}
-	cout<<"is there a concentrated moment force about the 'z' axis acting on the cylinder?(y,n)"<<endl;
+	cout<<"Is there a concentrated moment force about the 'z' axis acting on the cylinder?(y,n)"<<endl;
 	cin>>answer;
 	while(answer!= 'y' && answer != 'n'){
-		cout<<"did not understand input, enter 'y' for yes and 'n' for no"<<endl;
+		cout<<"Could not understand input, enter 'y' for yes and 'n' for no"<<endl;
 		cin>>answer;
 	}
-	if(answer== 'y'){    //collecting values for concentrated moments on the cylinder
-		cout<<"what is the value of the concentrated moment in Newton meters? positive values are rotating counterclockwise"<<endl;
+	if(answer== 'y'){                                                               //collecting values for concentrated moments on the cylinder
+		cout<<"What is the value of the concentrated moment in Newton meters?\nPositive values are rotating counterclockwise"<<endl;
 		cin>>M1;
-		cout<<"at what x value in meters along the cylinder is the conentrated moment located?"<<endl;
+		cout<<"At what x value in meters along the cylinder is the conentrated moment located?"<<endl;
 		cin>>XM1;
 		while (XM1<=0 or XM1>length){
-			cout<<"the x value for the location of the concentrated load on the cylinder must be a positive non-zero value that is less than or equal to the lenth of the cylinder,\nenter another value"<<endl;
+			cout<<"The x value for the location of the concentrated load on the cylinder must be a positive\nnon-zero value that is less than or equal to the length of the cylinder,\nenter another value"<<endl;
 			cin>>XM1;
 		}
-		cout<<"is there another concentrated moment force about the 'z' axis acting on the cylinder?(y,n)"<<endl;
+		cout<<"Is there another concentrated moment force about the 'z' axis acting on the cylinder?(y,n)"<<endl;
 		cin>>answer;
 		while(answer!= 'y' && answer != 'n'){
-			cout<<"did not understand input, enter 'y' for yes and 'n' for no"<<endl;
+			cout<<"Did not understand the input\nEnter 'y' for yes and 'n' for no"<<endl;
 			cin>>answer;
 		}
 		if(answer== 'y'){
-			cout<<"what is the value of the concentrated moment in Newton meters? positive values are rotating counterclockwise"<<endl;
+			cout<<"What is the value of the concentrated moment in Newton meters?\nPositive values are rotating counterclockwise"<<endl;
 			cin>>M2;
-			cout<<"at what x value in meters along the cylinder is the conentrated moment located?"<<endl;
+			cout<<"At what x value in meters along the cylinder is the conentrated moment located?"<<endl;
 			cin>>XM2;
 			while (XM2<=0 or XM2>length){
-				cout<<"the x value for the location of the concentrated load on the cylinder must be a positive non-zero value that is less than or equal to the lenth of the cylinder,\nenter another value"<<endl;
+				cout<<"The x value for the location of the concentrated load on the cylinder\nmust be a positive non-zero value that is less than or equal to the lenth of the cylinder,\nEnter another value"<<endl;
 				cin>>XM2;
 			}
 		}
-	}
-	cout<<"is there a rectangualr distributed load acting on the cylinder(y,n)"<<endl;
+	} 
+	cout<<"Is there a rectangualar distributed load acting on the cylinder?(y,n)"<<endl;
 	cin>>answer;
 	while(answer!= 'y' && answer != 'n'){
-		cout<<"did not understand input, enter 'y' for yes and 'n' for no"<<endl;
+		cout<<"Did not understand input, enter 'y' for yes and 'n' for no"<<endl;
 		cin>>answer;
 	}
-	if(answer=='y'){               //collecting inputs for the distributed loads
-		cout<<"what is the value of the distributed load in newtons per meter"<<endl;
+	if(answer=='y'){                                                              //collecting inputs for the distributed loads
+		cout<<"What is the value of the distributed load in newtons per meter?"<<endl;
 		cin>>RDL1;
-		cout<<"at what x value in meters does the distributed load begin"<<endl;
+		cout<<"At what x value in meters does the distributed load begin?"<<endl;
 		cin>>XRL11;
-		cout<<"at what x value in meters does the distributed load end"<<endl;
+		cout<<"At what x value in meters does the distributed load end?"<<endl;
 		cin>>XRL12;
-		cout<<"is there another rectangular distributed load acting on the cylinder(y,n)"<<endl;
+		while(XRL11<0 or XRL12<XRL12 or XRL12>length){
+			if(XRL11<0){
+				cout<<"The begining and end of the distributed load cannot be less than 0"<<endl;
+			}
+			if(XRL12<XRL11){
+				cout<<"The x value for the end of the distributed load needs to be the larger value of the two"<<endl;
+			}
+			if(XRL12>length){
+				cout<<"The distributed load cannot extend past the end of the cylinder"<<endl;
+			}
+			cout<<"At what x value in meters does the distributed load begin?"<<endl;
+			cin>>XRL11;
+			cout<<"At what x value in meters does the distributed load end?"<<endl;
+			cin>>XRL12;
+		}
+		cout<<"Is there another rectangular distributed load acting on the cylinder?(y,n)"<<endl;
+		cin>>answer;
 		while(answer!= 'y' && answer != 'n'){
-			cout<<"did not understand input, enter 'y' for yes and 'n' for no"<<endl;
+			cout<<"Did not understand input, enter 'y' for yes and 'n' for no"<<endl;
 			cin>>answer;
 		}
 		if(answer=='y'){
-			cout<<"what is the value of the distributed load in newtons per meter"<<endl;
+			cout<<"What is the value of the distributed load in Newton per meter?"<<endl;
 			cin>>RDL2;
-			cout<<"at what x value in meters does the distributed load begin"<<endl;
+			cout<<"At what x value in meters does the distributed load begin?"<<endl;
 			cin>>XRL21;
 			cout<<"at what x value in meters does the distributed load end"<<endl;
 			cin>>XRL22;
+			while(XRL21<0 or XRL22<XRL12 or XRL22>length){
+				if(XRL21<0){
+					cout<<"The begining and end of the distributed load cannot be less than 0"<<endl;
+				}
+				if(XRL22<XRL21){
+					cout<<"The x value for the end of the distributed load needs to be the larger value between the two"<<endl;
+				}
+				if(XRL22>length){
+					cout<<"The distributed load cannot extend past the end of the cylinder"<<endl;
+				}
+				cout<<"At what x value in meters does the distributed load begin?"<<endl;
+				cin>>XRL21;
+				cout<<"At what x value in meters does the distributed load end?"<<endl;
+				cin>>XRL22;
+			}
 		}
 	}
-	cout<<"is there a torsion force about the 'x' axis acting on the cylinder(y,n)"<<endl;
+	cout<<"Is there a torsion force about the 'x' axis acting on the cylinder?(y,n)"<<endl;
 	cin>>answer;
 	while(answer!= 'y' && answer != 'n'){
-		cout<<"did not understand input, enter 'y' for yes and 'n' for no"<<endl;
+		cout<<"Did not understand input, enter 'y' for yes and 'n' for no"<<endl;
 		cin>>answer;
 	}
-	if(answer=='y'){
-		cout<<"what is the value of the torsion force about the 'x' axis in Newton meters? positive values are clockwise"<<endl;
+	if(answer=='y'){                          //collecting inputs about torsion forces
+		cout<<"What is the value of the torsion force about the 'x' axis in Newton meters? \nPositive values are clockwise"<<endl;
 		cin>>TF1;
-		cout<<"at what x value in meters along the cylinder is the torsion force acting?"<<endl;
+		cout<<"At what x value in meters along the cylinder is the torsion force acting?"<<endl;
 		cin>>XTF1;
-		cout<<"is there another torsion force about the 'x' axis acting on the cylinder?(y,n)"<<endl;
+		while(XTF1<0 or XTF1>length){
+			cout<<"The x value for the location of the torsion force cannot\nbe less than zero or more than the length of the cylinder\nEnter another value"<<endl;
+			cin>>XTF1;
+		}
+		cout<<"Is there another torsion force about the 'x' axis acting on the cylinder?(y,n)"<<endl;
 		cin>>answer;
 		while(answer!= 'y' && answer != 'n'){
-			cout<<"did not understand input, enter 'y' for yes and 'n' for no"<<endl;
+			cout<<"Did not understand input, enter 'y' for yes and 'n' for no"<<endl;
 			cin>>answer;
 		}
 		if(answer=='y'){
-			cout<<"what is the value of the torsion force about the 'x' axis in Newton meters? positive values are clockwise"<<endl;
+			cout<<"What is the value of the torsion force about the 'x' axis in Newton meters? positive values are clockwise"<<endl;
 			cin>>TF2;
-			cout<<"at what x value in meters along the cylinder is the torsion force acting?"<<endl;
+			cout<<"At what x value in meters along the cylinder is the torsion force acting?"<<endl;
 			cin>>XTF2;
+			while(XTF2<0 or XTF2>length){
+				cout<<"The x value for the location of the torsion force cannot\nbe less than zero or more than the length of the cylinder\nEnter another value"<<endl;
+				cin>>XTF2;
+			}
 		}
-	}
+	}                      //calculating reaction forces at the wall
 	FRT=TF1+TF2;
 	FRX=(F1x+F2x)*(0-1);
 	FRY=(F1y+F2y+(RDL1*(XRL12-XRL11))+(RDL2*(XRL22-XRL21)))*(0-1);
 	FRM=((F1y*XF1)+(F2y*XF2)+((RDL1*(XRL12-XRL11))*(XRL11+((XRL12-XRL11)/2)))+((RDL2*(XRL22-XRL21))*(XRL11+((XRL12-XRL11)/2))))*(0-1);
 	double ABNS=0, ABNSM=0, ABSS=0, ABSSM=0, BBNS=0, BBNSM=0, BBSS=0, BBSSM=0, maxstress=0, maxstrain=0;
 	double localVF=0, localMF=0, localTF=0, localAF=0, maxstressxlocation=0, maxstrainxlocation=0, maxstresslocation=0, maxstrainlocation=0;
+	   // for loop calulates the stresses and strains in the cylinder from 0 to the end of cylinder in increments of .01 meters
 	for(double localx=0; localx<=length;localx+=.01){
 		localVF=FRY;
 		localMF=FRM+(FRY*(0-localx));
 		localTF=FRT;
 		localAF=FRX;
-		if(XF1<=localx){
-			localVF+=F1y;
-			localMF+=(F1y*(XF1-localx));
+		if(XF1<=localx){                  //as x increases any conentrated force, concentrated moment, distributed load, or torsion force
+			localVF+=F1y;                // that is acting at a point that is equal to or less that the x value is used to calcuate 
+			localMF+=(F1y*(XF1-localx));  // the stress and strain at that point
 			localAF+=F1x;
 		}
 		if(XF2<=localx){
@@ -236,7 +276,7 @@ int main(){
 			maxstrainxlocation=localx;
 			maxstrainlocation=2;
 		}
-	}
+	}                 //outputs important information that could to used to verify that the code is working as well as determine where it went wrong 
 	cout<<"The reaction force at the wall in the 'y' direction is "<<FRY<<"N"<<endl;
 	cout<<"The reaction force at the wall in the 'x' direction is "<<FRX<<"N"<<endl;
 	cout<<"The reaction torsion force about the 'x' axis at the wall is "<<FRT<<"Nm"<<endl;
@@ -244,15 +284,15 @@ int main(){
 	cout<<"The max stress in the cylinder is "<<maxstress<<"Pa at "<<maxstressxlocation<<"meters from the wall"<<endl;
 	cout<<"The max strain in the cylinder is "<<maxstrain<<"Pa at "<<maxstrainxlocation<<"meters from the wall"<<endl;
 	if(maxstresslocation==1){
-		cout<<"the max stress is located on the top or bottom of the cylinder"<<endl;	
+		cout<<"The max stress is located on the top or bottom of the cylinder"<<endl;	
 	}
 	if(maxstresslocation==2){
-		cout<<"the max strain is located on the left or right side of the cylinder"<<endl;	
+		cout<<"The max strain is located on the left or right side of the cylinder"<<endl;	
 	}
 	if(maxstrainlocation==1){
-		cout<<"the max strain is located on the top or bottom of the cylinder"<<endl;	
+		cout<<"The max strain is located on the top or bottom of the cylinder"<<endl;	
 	}
 	if(maxstrainlocation==2){
-		cout<<"the max strain is located on the left or right side of the cylinder"<<endl;	
+		cout<<"The max strain is located on the left or right side of the cylinder"<<endl;	
 	}
 }
