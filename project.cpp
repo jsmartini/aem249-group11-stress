@@ -1,5 +1,7 @@
 #include <iostream>
-#include <cmath>
+#include <math.h>
+
+//#define M_PI 3.14
 
 using namespace std;
 
@@ -12,7 +14,7 @@ int main()
 	double length = 0, diameter = 0, CSarea = 0, torsionconstant = 0, momentconstant = 0, transverseconstant = 0;
 	
 	//Third line of variables are used for orgainizing inputed values.
-	char answer = '';
+	char answer;
 	
 	cout << "What is the diameter of the cylinder in meters?"<<endl; //Get values for the dimentions of the cylinder.
 	cin >> diameter;
@@ -60,7 +62,7 @@ int main()
 		cout << "At what x value in meters along the cylinder is the concentrated load located?" << endl;
 		cin >> XF1;
 		
-		while (XF1 <= 0 or XF1 > length)
+		while (XF1 <= 0 || XF1 > length)
 		{
 			cout << "The x value for the location of the concentrated load on the cylinder \nmust be a positive, non-zero value that is less than or equal \nto the lenth of the cylinder. \nEnter another value." << endl;
 			cin >> XF1;
@@ -86,7 +88,7 @@ int main()
 			cout << "At what x value in meters along the cylinder is the concentrated load located?" << endl;
 			cin >> XF2;
 			
-			while (XF2 <= 0 or XF2 > length)
+			while (XF2 <= 0 || XF2 > length)
 			{
 				cout << "The x value for the location of the concentrated load on the cylinder \nmust be a positive non-zero value that is less than or equal to the length of the cylinder. \nEnter another value." << endl;
 				cin >> XF2;
@@ -111,7 +113,7 @@ int main()
 		cout << "At what x value in meters along the cylinder is the conentrated moment located?" << endl;
 		cin >> XM1;
 		
-		while (XM1 <= 0 or XM1 > length)
+		while (XM1 <= 0 || XM1 > length)
 		{
 			cout << "The x value for the location of the concentrated load on the cylinder must be a positive \nnon-zero value that is less than or equal to the length of the cylinder. \nEnter another value" << endl;
 			cin >> XM1;
@@ -134,7 +136,7 @@ int main()
 			cout << "At what x value in meters along the cylinder is the conentrated moment located?" << endl;
 			cin >> XM2;
 			
-			while (XM2 <= 0 or XM2 > length)
+			while (XM2 <= 0 || XM2 > length)
 			{
 				cout << "The x value for the location of the concentrated load on the cylinder \nmust be a positive non-zero value that is less than or equal to the lenth of the cylinder.\nEnter another value." << endl;
 				cin >> XM2;
@@ -162,7 +164,7 @@ int main()
 		cout << "At what x value in meters does the distributed load end?" << endl;
 		cin >> XRL12;
 		
-		while(XRL11 < 0 or XRL12 < XRL12 or XRL12 > length)
+		while(XRL11 < 0 || XRL12 < XRL12 || XRL12 > length)
 		{
 			if(XRL11 < 0)
 			{
@@ -206,7 +208,7 @@ int main()
 			cout << "At what x value in meters does the distributed load end?" << endl;
 			cin >> XRL22;
 			
-			while(XRL21 < 0 or XRL22 < XRL12 or XRL22 > length)
+			while(XRL21 < 0 || XRL22 < XRL12 || XRL22 > length)
 			{
 				if(XRL21 < 0)
 				{
@@ -249,7 +251,7 @@ int main()
 		cout << "At what x value in meters along the cylinder is the torsion force acting?" << endl;
 		cin >> XTF1;
 		
-		while(XTF1 < 0 or XTF1 > length)
+		while(XTF1 < 0 || XTF1 > length)
 		{
 			cout << "The x value for the location of the torsion force cannot \nbe less than zero or more than the length of the cylinder. \nEnter another value." << endl;
 			cin >> XTF1;
@@ -272,7 +274,7 @@ int main()
 			cout << "At what x value in meters along the cylinder is the torsion force acting?" << endl;
 			cin >> XTF2;
 			
-			while(XTF2 < 0 or XTF2 > length)
+			while(XTF2 < 0 || XTF2 > length)
 			{
 				cout << "The x value for the location of the torsion force cannot \nbe less than zero or more than the length of the cylinder. \nEnter another value." << endl;
 				cin >> XTF2;
