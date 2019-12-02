@@ -1,6 +1,6 @@
 #include <iostream>
 #include <math.h>
-//math.h is used to define M_PI as 3.14159... and for the power and squareroot functions
+//math.h is used to define M_PI as 3.14159... and for the power and squareroot functions.
 
 using namespace std;
 
@@ -8,20 +8,20 @@ int main()
 {
 	double FRM = 0, FRY = 0, FRX = 0, FRT = 0, F1y = 0, F1x = 0, XF1 = 0, F2x = 0, F2y = 0, XF2 = 0, M1 = 0, XM1 = 0, M2 = 0, XM2 = 0, RDL1 = 0, XRL11 = 0, XRL12 = 0, RDL2 = 0, XRL21 = 0, XRL22 = 0, TF1 = 0, XTF1 = 0, TF2 = 0, XTF2 = 0;
 	
-	//FRM, FRY, FRX, and FRT are the reaction forces at the wall broken down into the moment about the z axis, y axis, x axis, and a reaction torsion force about the x axis
-	//F1x and F1y are the 1st concentrated force x and y components
-	//F2x and F2y are the 2nd concentrated force x and y components
-	//XF1 and XF2 are the locations that the 2 concentrated force act on the cylinder
-	//M1 and M2 are the concentrated moments about the z axis acting on the cylinder
-	//XM1 and XM2 are the locations where the concentrated moments are acting on the cylinder
-	//TF1 and TF2 are the torsion forces acting on the cylinder at locations XTF1 and XTF2 respectfully
-	//RDL1 and RDL2 are the rectangular distributed loads
-	//XRL11 and XRL12 are the starting and ending locations for the first rectangular distributed load
-	//XRL21 and XRL22 are the starting and ending locations for the second rectangular distributed load
+	//FRM, FRY, FRX, and FRT are the reaction forces at the wall broken down into the moment about the z axis, y axis, x axis, and a reaction torsion force about the x axis.
+	//F1x and F1y are the 1st concentrated force x and y components.
+	//F2x and F2y are the 2nd concentrated force x and y components.
+	//XF1 and XF2 are the locations that the 2 concentrated force act on the cylinder.
+	//M1 and M2 are the concentrated moments about the z axis acting on the cylinder.
+	//XM1 and XM2 are the locations where the concentrated moments are acting on the cylinder.
+	//TF1 and TF2 are the torsion forces acting on the cylinder at locations XTF1 and XTF2 respectfully.
+	//RDL1 and RDL2 are the rectangular distributed loads.
+	//XRL11 and XRL12 are the starting and ending locations for the first rectangular distributed load.
+	//XRL21 and XRL22 are the starting and ending locations for the second rectangular distributed load.
 	
 	double length = 0, diameter = 0, CSarea = 0, torsionconstant = 0, momentconstant = 0, transverseconstant = 0;
 	
-	//I used the answer variable as a way of asking the user what forces are present on the cylinder
+	//I used the answer variable as a way of asking the user what forces are present on the cylinder.
 	
 	char answer;
 	
@@ -45,8 +45,8 @@ int main()
 	
 	CSarea = diameter * diameter * M_PI * 0.25;  //Solve for constants based on the diminsions of the cylinder.
 	
-	//these constants are based on the initial formulas for moment stresses, torsion train, and transverse shear stress
-	//I calcualted a portion of the formulas as constants to make solving for the stresses and strains less complicated in the for loop
+	//These constants are based on the initial formulas for moment stresses, torsion train, and transverse shear stress.
+	//I calcualted a portion of the formulas as constants to make solving for the stresses and strains less complicated in the for loop.
 	
 	momentconstant = 32 / (M_PI * pow(diameter, 3));
 	
@@ -294,7 +294,7 @@ int main()
 		}
 	}
 	
-	//Calculating reaction forces at the wall, i multiply each by (0-1) to swap the sign for the reaction force
+	//Calculating reaction forces at the wall, I multiply each by (0-1) to swap the sign for the reaction force.
 	
 	FRT = (TF1 + TF2) * (0 - 1);
 	
@@ -309,20 +309,20 @@ int main()
 	for(double localx = 0; localx <= length; localx += (length/100000))
 	{
 		
-		//the local variables are the forces and moments found at each location
-		//the for loop starts at x=0 and goes till x=length which would be end of the cylinder
-		//at each location or "localx" the shear force(localVF), axial force(localAF), moment about
-		// the z-axis(localMF), and torsion force about the x-axis(localTF) are calulated
+		//The local variables are the forces and moments found at each location.
+		//The for loop starts at x=0 and goes till x=length which would be end of the cylinder.
+		//At each location or "localx" the shear force(localVF), axial force(localAF), moment about.
+		//The z-axis(localMF), and torsion force about the x-axis(localTF) are calulated.
 		
 		localVF = FRY;
 		localMF = FRM + (FRY * (0 - localx));
 		localTF = FRT;
 		localAF = FRX;
 		
-		//the if statements are there to determine if the force or moment is being used yet
-		//since the cylinder is in static equalibrum at any point the forces and moments on the left
-		//equal the ones on the right so these if statement find which forces and moments are acting on the left hand
-		//side of localx value and sum them up 
+		//The if statements are there to determine if the force or moment is being used yet.
+		//Since the cylinder is in static equalibrum at any point the forces and moments on the left.
+		//Equal the ones on the right so these if statement find which forces and moments are acting on the left hand.
+		//Side of localx value and sum them up. 
 		
 		if(XF1 <= localx)
 		{
@@ -388,7 +388,7 @@ int main()
 			localMF += M2;
 		}
 		
-		//I set all local forces positive to help find the maximum values of normal and shear stress
+		//I set all local forces positive to help find the maximum values of normal and shear stress.
 		
 		if(localAF < 0)
 		{
@@ -410,11 +410,11 @@ int main()
 			localTF = localTF * (0 - 1);
 		}
 		
-		//here is where i use the locally calulated forces and moments to find the stress and strains
-		//the two locations where a maximum stress or strain will occur is either on the top and bottom or the sides of the cylinder
-		//ABNS is the normal stress located at the top or bottom of the cylinder at each localx
-		//BBNS is the normal stress located on the sides of the cylinder at each localx
-		//ABSS and BBSS are the shear stresses at either the top or bottom or sides of the cylinder at each localx
+		//Here is where i use the locally calulated forces and moments to find the stress and strains.
+		//The two locations where a maximum stress or strain will occur is either on the top and bottom or the sides of the cylinder.
+		//ABNS is the normal stress located at the top or bottom of the cylinder at each localx.
+		//BBNS is the normal stress located on the sides of the cylinder at each localx.
+		//ABSS and BBSS are the shear stresses at either the top or bottom or sides of the cylinder at each localx.
 		
 		ABNS = ((localAF) / CSarea) + (localMF * momentconstant);
 		
@@ -424,11 +424,11 @@ int main()
 		
 		BBSS = (localTF * torsionconstant) + (localVF * transverseconstant);
 		
-		//after the normal stress and shear stress are found at each localx the max principle stress and max shear stress are found
-		//the maxes are caluated using mohrs circle
-		//ABNSM is the max normal stress on the top or bottom
-		//ABSSM is the max shear stress on the top or bottom
-		//BBNSM and BBSSM are the max normal and shear stress and the sides
+		//After the normal stress and shear stress are found at each localx the max principle stress and max shear stress are found.
+		//The maxes are caluated using mohrs circle.
+		//ABNSM is the max normal stress on the top or bottom.
+		//ABSSM is the max shear stress on the top or bottom.
+		//BBNSM and BBSSM are the max normal and shear stress and the sides.
 		
 		ABNSM = (ABNS / 2) + sqrt(pow(ABNS / 2, 2) + pow(ABSS, 2));
 		
@@ -438,8 +438,8 @@ int main()
 		
 		BBSSM = sqrt(pow(BBNS / 2, 2) + pow(BBSS, 2));
 		
-		//these if statements determine if the localx max shear and nomal strains are larger than the previous maxes
-		// if they are they replace them as the new maxnormal and maxshear
+		//These if statements determine if the localx max shear and nomal strains are larger than the previous maxes.
+		//If they are they replace them as the new maxnormal and maxshear.
 		
 		if(ABNSM > maxnormal)
 		{
