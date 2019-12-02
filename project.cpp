@@ -52,7 +52,7 @@ int main()
 	
 	torsionconstant = 16 / (M_PI * pow(diameter, 3));
 	
-	transverseconstant = 4 / (3 * M_PI * pow(diameter / 2, 2));
+	transverseconstant = 16 / (3 * M_PI * pow(diameter , 2));
 	
 	cout << "Is there a concentrated force acting on the cylinder ('y' for yes and 'n' for no)?" << endl;
 	cin >> answer;
