@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <vector>
 //math.h is used to define M_PI as 3.14159... and for the power and squareroot functions
 
 using namespace std;
@@ -24,7 +25,9 @@ int main()
 	//I used the answer variable as a way of asking the user what forces are present on the cylinder
 	
 	char answer;
-	
+	//		JONATHAN MARTINI INPUTS AND Torsion moment and traverse constants
+	//
+	//
 	cout << "What is the diameter of the cylinder in meters?"<<endl; //Get values for the dimentions of the cylinder.
 	cin >> diameter;
 	
@@ -34,7 +37,7 @@ int main()
 		cin >> diameter;
 	}
 	
-	cout << "What is the length of the cylinder in meters?" << endl;
+	
 	cin >> length;
 	
 	while (length <= 0)
@@ -54,6 +57,10 @@ int main()
 	
 	transverseconstant = 16 / (3 * M_PI * pow(diameter , 2));
 	
+
+	//END JONATHAN MARTINI
+
+	//Ruby Champlin concentrated forces
 	cout << "Is there a concentrated force acting on the cylinder ('y' for yes and 'n' for no)?" << endl;
 	cin >> answer;
 	
@@ -108,6 +115,10 @@ int main()
 		}
 	}
 	
+	// Ruby Champlin
+
+	//Juan Mayz Concentrated Moments
+
 	cout << "Is there a concentrated moment force about the 'z' axis acting on the cylinder ('y' for yes and 'n' for no)?" << endl;
 	cin >> answer;
 	
@@ -156,6 +167,11 @@ int main()
 		}
 	}
 	 
+
+	//Juan Mayz
+
+	//Nick Pizzuto Rect Loads
+
 	cout << "Is there a rectangualar distributed load acting on the cylinder ('y' for yes and 'n' for no)?" << endl;
 	cin >> answer;
 	
@@ -246,6 +262,11 @@ int main()
 		}
 	}
 	
+	//Nick Pizzuto
+
+	//Tyler Prine Torsion
+
+
 	cout << "Is there a torsion force about the 'x' axis acting on the cylinder ('y' for yes and 'n' for no)?" << endl;
 	cin >> answer;
 	
@@ -294,6 +315,10 @@ int main()
 		}
 	}
 	
+	//Tyler Prine
+
+	//James Colvin ME250 stuff
+
 	//Calculating reaction forces at the wall, i multiply each by (0-1) to swap the sign for the reaction force
 	
 	FRT = (TF1 + TF2) * (0 - 1);
@@ -476,6 +501,10 @@ int main()
 		}
 	}                 
 
+	// James Colvin
+
+	//Jonathan Martini	outputs
+
 	//Outputs important information that could to used to verify that the code is working as well as determine where it went wrong.
 	
 	cout << "The reaction force at the wall in the 'y' direction is " << FRY << "N." << endl;
@@ -509,4 +538,7 @@ int main()
 	{
 		cout << "The max shear stress is located on the left or right side of the cylinder" << endl;	
 	}
+
+	// Jonathan Martini outputs
+
 }
