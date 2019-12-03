@@ -330,7 +330,7 @@ int main()
 	
 	double ABNS = 0, ABNSM = 0, ABSS = 0, ABSSM = 0, BBNS = 0, BBNSM = 0, BBSS = 0, BBSSM = 0, maxnormal = 0, maxshear = 0, localVF = 0, localMF = 0, localTF = 0, localAF = 0, maxnormalxlocation = 0, maxshearxlocation = 0, maxnormallocation = 0, maxshearlocation = 0;
 	
-	double axialstressdirection;  //since the normal stress due to bending can be either positive or negative the max normal stress will be created
+	double localaxialstressdirection=-1, maxstressdirection=-1;  //since the normal stress due to bending can be either positive or negative the max normal stress will be created
 								  //in the same direction as the axial stress
 	
 	for(double localx = 0; localx <= length; localx += (length / 100000))
@@ -346,7 +346,7 @@ int main()
 		localTF = FRT;
 		localAF = FRX;
 		
-		axialstressdirection = -1;  //resets axial stress direction to assume positive direction
+		localaxialstressdirection = -1;  //resets axial stress direction to assume positive direction
 		
 		//the if statements are there to determine if the force or moment is being used yet
 		//since the cylinder is in static equalibrum at any point the forces and moments on the left
@@ -422,7 +422,7 @@ int main()
 		if(localAF < 0)
 		{
 			localAF = localAF * (0 - 1); //this is to let us know that this particalular axial stress is negative
-			axialstressdirection = 1;   //we change it to positive anyway to make the math easier but will remember that it should come out negative
+			localaxialstressdirection = 1;   //we change it to positive anyway to make the math easier but will remember that it should come out negative
 		}
 		
 		if(localVF < 0)
@@ -471,11 +471,12 @@ int main()
 		//these if statements determine if the localx max shear and nomal strains are larger than the previous maxes
 		// if they are they replace them as the new maxnormal and maxshear
 		
-		if(ABNSM > abs(maxnormal))
+		if(ABNSM > maxnormal)
 		{
-			maxnormal = ABNSM * axialstressdirection;
+			maxnormal = ABNSM;
 			maxnormalxlocation = localx;
 			maxnormallocation = 1;
+			maxstressdirection = localaxialstressdirection;
 		}
 		
 		if(ABSSM > maxshear)
@@ -487,9 +488,10 @@ int main()
 		
 		if(BBNSM > abs(maxnormal))
 		{
-			maxnormal = BBNSM * axialstressdirection;
+			maxnormal = BBNSM;
 			maxnormalxlocation = localx;
 			maxnormallocation = 2;
+			maxstressdirection = localaxialstressdirection;
 		}
 		
 		if(BBSSM > maxshear)
@@ -514,7 +516,7 @@ int main()
 	
 	cout << "The reaction moment force about the 'z' axis at the wall is " << FRM << " Nm." << endl;
 	
-	cout << "The max normal stress in the cylinder is " << maxnormal << " Pa at " << maxnormalxlocation << " meters from the wall." << endl;
+	cout << "The max normal stress in the cylinder is " << maxnormal * maxstressdirection << " Pa at " << maxnormalxlocation << " meters from the wall." << endl;
 	
 	cout << "The max shear stress in the cylinder is " << maxshear << " Pa at " << maxshearxlocation << " meters from the wall." << endl;
 	
