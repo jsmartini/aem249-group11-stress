@@ -20,7 +20,7 @@ int main()
 	//XRL21 and XRL22 are the starting and ending locations for the second rectangular distributed load
 	
 
-	// JONATHAN MARTINI csarea diameter length moment torsion transverse constants
+	// Jonathan Martini: csarea diameter length moment torsion transverse constants
 
 
 	double length = 0, diameter = 0, CSarea = 0, torsionconstant = 0, momentconstant = 0, transverseconstant = 0;
@@ -56,13 +56,13 @@ int main()
 	
 	torsionconstant = 16 / (M_PI * pow(diameter, 3));
 	
-	transverseconstant = 16 / (3 * M_PI * pow(diameter , 2));
+	transverseconstant = 16 / (3 * M_PI * pow(diameter, 2));
 	
 
 	// Jonathan Martini
 
 
-	//Tyler Prine Concentrated Forces
+	//Tyler Prine: Concentrated Forces
 
 	cout << "Is there a concentrated force acting on the cylinder ('y' for yes and 'n' for no)?" << endl;
 	cin >> answer;
@@ -118,7 +118,7 @@ int main()
 		}
 	}
 	
-	//Concentrated Moments Ruby Champlin
+	//Ruby Champlin: Concentrated Moments
 
 	cout << "Is there a concentrated moment force about the 'z' axis acting on the cylinder ('y' for yes and 'n' for no)?" << endl;
 	cin >> answer;
@@ -170,7 +170,7 @@ int main()
 
 	// Ruby Champlin
 	 
-	//Nick Pizzuto Rect Load
+	//Nick Pizzuto: Rect Load
 
 	cout << "Is there a rectangualar distributed load acting on the cylinder ('y' for yes and 'n' for no)?" << endl;
 	cin >> answer;
@@ -250,7 +250,7 @@ int main()
 				
 				if(XRL22 > length)
 				{
-					cout << "The distributed load cannot extend past the end of the cylinder. Input a value less than "<<length<< endl;
+					cout << "The distributed load cannot extend past the end of the cylinder. Input a value less than " << length << endl;
 				}
 				
 				cout << "At what x value in meters does the distributed load begin?" << endl;
@@ -265,7 +265,7 @@ int main()
 	//Nick Pizzuto
 	
 
-	//Juan Mayz Torsion
+	//Juan Mayz: Torsion
 
 	cout << "Is there a torsion force about the 'x' axis acting on the cylinder ('y' for yes and 'n' for no)?" << endl;
 	cin >> answer;
@@ -315,10 +315,10 @@ int main()
 	}
 	
 	//Jaun Mayz
-
-	//Calculating reaction forces at the wall, i multiply each by (0-1) to swap the sign for the reaction force
 	
-	//James Colvin ME250 math
+	//James Colvin: ME250 math
+	
+	//Calculating reaction forces at the wall, I multiply each by (0-1) to swap the sign for the reaction force
 
 	FRT = (TF1 + TF2) * (0 - 1);
 	
@@ -326,14 +326,14 @@ int main()
 	
 	FRY = (F1y + F2y + (RDL1 * (XRL12 - XRL11)) + (RDL2 * (XRL22 - XRL21))) * (0 - 1);
 	
-	FRM = ((F1y * XF1) + (F2y * XF2) + ((RDL1 * (XRL12 - XRL11)) * (XRL11 + ((XRL12 - XRL11) / 2))) + ((RDL2 * (XRL22 - XRL21)) * (XRL21 + ((XRL22 - XRL21) / 2)))+M1+M2) * (0 - 1);
+	FRM = ((F1y * XF1) + (F2y * XF2) + ((RDL1 * (XRL12 - XRL11)) * (XRL11 + ((XRL12 - XRL11) / 2))) + ((RDL2 * (XRL22 - XRL21)) * (XRL21 + ((XRL22 - XRL21) / 2))) + M1 + M2) * (0 - 1);
 	
 	double ABNS = 0, ABNSM = 0, ABSS = 0, ABSSM = 0, BBNS = 0, BBNSM = 0, BBSS = 0, BBSSM = 0, maxnormal = 0, maxshear = 0, localVF = 0, localMF = 0, localTF = 0, localAF = 0, maxnormalxlocation = 0, maxshearxlocation = 0, maxnormallocation = 0, maxshearlocation = 0;
 	
 	double axialstressdirection;  //since the normal stress due to bending can be either positive or negative the max normal stress will be created
 								  //in the same direction as the axial stress
 	
-	for(double localx = 0; localx <= length; localx += (length/100000))
+	for(double localx = 0; localx <= length; localx += (length / 100000))
 	{
 		
 		//the local variables are the forces and moments found at each location
