@@ -8,7 +8,7 @@ int main()
 {
 	double FRM = 0, FRY = 0, FRX = 0, FRT = 0;
 	
-	int numberofconcentratedloads=0, numberofdistributedloads=0, numberofmoments=0, numberoftorques=0;
+	int numberofconcentratedloads = 0, numberofdistributedloads = 0, numberofmoments = 0, numberoftorques = 0;
 	
 	
 	/*
@@ -29,7 +29,7 @@ int main()
 	
 	//I used the answer variable as a way of asking the user what forces are present on the cylinder
 	
-	cout << "What is the diameter of the cylinder in meters? \n(This veritical diameter will extend vertically in the y direction and in the z direction into and out of the page)"<<endl; //Get values for the dimentions of the cylinder.
+	cout << "What is the diameter of the cylinder in meters? \n(This veritical diameter will extend vertically in the y direction and in the z direction into and out of the page)" << endl; //Get values for the dimentions of the cylinder.
 	cin >> diameter;
 	
 	while(diameter <= 0)
@@ -66,9 +66,10 @@ int main()
 
 	cout << "How many concentrated forces are acting on the cylinder?" << endl;
 	cin >> numberofconcentratedloads;
+	
 	double Fx[numberofconcentratedloads], Fy[numberofconcentratedloads], XF[numberofconcentratedloads];
 	
-	for(int x=0; x<numberofconcentratedloads;x++)
+	for(int x = 0; x < numberofconcentratedloads; x++)
 	{
 		cout << "What is the 'x' value of the concentrated load in Newtons? \nPositive values are pointed away from the wall support at x=0." << endl;
 		cin >> Fx[x];
@@ -84,17 +85,20 @@ int main()
 			cout << "The x value for the location of the concentrated load on the cylinder \nmust be a positive, non-zero value that is less than or equal \nto the lenth of the cylinder. \nEnter a value between 0 and " << length << endl;
 			cin >> XF[x];
 		}
-		FRX+=Fx[x]*-1;
-		FRY+=Fy[x]*-1;
-		FRM+=Fy[x]*XF[x]*-1;
+		
+		FRX += Fx[x] * -1;
+		FRY += Fy[x] * -1;
+		FRM += Fy[x] * XF[x] * -1;
 	}
 		
 	//Concentrated Moments Ruby Champlin
 
 	cout << "How many concentrated Moments about the z-axis are there?" << endl;
 	cin >> numberofmoments;
+	
 	double M[numberofmoments], XM[numberofmoments];
-	for(int x=0;x<numberofmoments;x++)
+	
+	for(int x = 0; x < numberofmoments; x++)
 	{
 		cout << "What is the value of the concentrated moment in Newton meters? \nPositive values are rotating counterclockwise." << endl;
 		cin >> M[x];
@@ -107,7 +111,7 @@ int main()
 			cout << "The x value for the location of the concentrated load on the cylinder must be a positive \nnon-zero value that is less than or equal to the length of the cylinder. \nEnter a value between 0 and " << length << endl;
 			cin >> XM[x];
 		}
-		FRM+=M[x]*-1;
+		FRM += M[x] * -1;
 	}
 	
 	// Ruby Champlin
@@ -116,7 +120,9 @@ int main()
 
 	cout << "How many distributed loads are acting on the cylinder?" << endl;
 	cin >> numberofdistributedloads;
+	
 	double RDL[numberofdistributedloads], XRDL1[numberofdistributedloads], XRDL2[numberofdistributedloads];
+	
 	for(int x=0;x<numberofdistributedloads;x++)
 	{
 		cout << "What is the value of the distributed load in newtons per meter?" << endl;
@@ -151,19 +157,21 @@ int main()
 			cout << "At what x value in meters does the distributed load end?" << endl;
 			cin >> XRDL2[x];
 		}
-		FRY+=RDL[x]*(XRDL2[x]-XRDL1[x])*-1;
-		FRM+=RDL[x]*(XRDL2[x]-XRDL1[x])*(XRDL1[x]+((XRDL2[x]-XRDL1[x])/2))*-1;
+		
+		FRY += RDL[x] * (XRDL2[x] - XRDL1[x]) * -1;
+		FRM += RDL[x] * (XRDL2[x] - XRDL1[x]) * (XRDL1[x] + ((XRDL2[x] - XRDL1[x]) / 2)) * -1;
 	}
 	
 	//Nick Pizzuto
 	
-
 	//Juan Mayz Torsion
 
 	cout << "How many Torsion forces are acting on the cylinder?" << endl;
 	cin >> numberoftorques;
+	
 	double T[numberoftorques], XT[numberoftorques];
-	for(int x=0;x<numberoftorques;x++)
+	
+	for(int x = 0; x < numberoftorques; x++)
 	{
 		cout << "What is the value of the torsion force about the 'x' axis in Newton meters? \nPositive values are clockwise." << endl;
 		cin >> T[x];
@@ -176,7 +184,8 @@ int main()
 			cout << "The x value for the location of the torsion force cannot \nbe less than zero or more than the length of the cylinder. \nEnter a value between 0 and " << length << endl;
 			cin >> XT[x];
 		}
-		FRT+=T[x]*-1;
+		
+		FRT += T[x] * -1;
 	}
 		
 	//Jaun Mayz
@@ -187,10 +196,10 @@ int main()
 
 	double ABNS = 0, ABNSM = 0, ABSS = 0, ABSSM = 0, BBNS = 0, BBNSM = 0, BBSS = 0, BBSSM = 0, maxnormal = 0, maxshear = 0, localVF = 0, localMF = 0, localTF = 0, localAF = 0, maxnormalxlocation = 0, maxshearxlocation = 0, maxnormallocation = 0, maxshearlocation = 0;
 	
-	double localaxialstressdirection=-1, maxstressdirection=-1;  //since the normal stress due to bending can be either positive or negative the max normal stress will be created
-								  //in the same direction as the axial stress
+	double localaxialstressdirection = -1, maxstressdirection = -1;  //since the normal stress due to bending can be either positive or negative the max normal stress will be created
+								 									 //in the same direction as the axial stress
 	
-	for(double localx = 0; localx <= length; localx += (length/100000))
+	for(double localx = 0; localx <= length; localx += (length / 100000))
 	{
 		
 		//the local variables are the forces and moments found at each location
@@ -209,7 +218,7 @@ int main()
 		//since the cylinder is in static equalibrum at any point the forces and moments on the left
 		//equal the ones on the right so these if statement find which forces and moments are acting on the left hand
 		//side of localx value and sum them up 
-		for(int x=0;x<numberofconcentratedloads;x++)
+		for(int x = 0; x < numberofconcentratedloads; x++)
 		{
 			if(XF[x] <= localx)
 			{
@@ -219,7 +228,7 @@ int main()
 			}
 		}
 		
-		for(int x=0;x<numberoftorques;x++)
+		for(int x = 0; x < numberoftorques; x++)
 		{
 			if(XT[x] <= localx)
 			{
@@ -227,7 +236,7 @@ int main()
 			}
 		}
 		
-		for(int x=0;x<numberofdistributedloads;x++)
+		for(int x = 0; x < numberofdistributedloads; x++)
 		{
 			if(XRDL1[x] <= localx)
 			{
@@ -245,7 +254,7 @@ int main()
 			}
 		}
 		
-		for(int x=0;x<numberofmoments;x++)
+		for(int x = 0; x < numberofmoments; x++)
 		{		
 			if(XM[x] <= localx)
 			{
