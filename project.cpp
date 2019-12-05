@@ -116,7 +116,7 @@ int main()
 	
 	// Ruby Champlin
 	 
-	//Nick Pizzuto Rect Load
+	//Nick Pizzuto  Jon Martini Rect Load
 
 	cout << "How many distributed loads are acting on the cylinder?" << endl;
 	cin >> numberofdistributedloads;
@@ -162,7 +162,7 @@ int main()
 		FRM += RDL[x] * (XRDL2[x] - XRDL1[x]) * (XRDL1[x] + ((XRDL2[x] - XRDL1[x]) / 2)) * -1;
 	}
 	
-	//Nick Pizzuto
+	//Nick Pizzuto Jon Martini
 	
 	//Juan Mayz Torsion
 
